@@ -17,8 +17,8 @@ namespace Bloggie.Web.Controllers
         public IActionResult Add(AddTagRequest addTagRequest)
         {
             
-            var name = addTagRequest.Name;
-            var displayName = addTagRequest.DisplayName;
+            
+
             return View("Add");
         }
     }
