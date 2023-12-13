@@ -117,8 +117,8 @@ namespace Bloggie.Web.Controllers
             // pass data to view
             return View(null);
         }
-        
 
+        [HttpPost]
         public async Task<IActionResult> Edit(EditBlogPostRequest editBlogPostRequest)
         {
             //map view model back to domain model
@@ -164,6 +164,24 @@ namespace Bloggie.Web.Controllers
             }
             //redirect to GET
             return RedirectToAction("Edit");
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(EditBlogPostRequest editBlogPostRequest)
+        {
+            // Talk to repository to delete this blog post and tags
+            var deletedBlogPost = await blogPostRepository.DeleteAsync(editBlogPostRequest.Id);
+
+            if (deletedBlogPost != null)
+            {
+                //show success notification
+                return RedirectToAction("List");
+            }
+
+            //show error notification
+            return RedirectToAction("Edit", new { id = editBlogPostRequest.Id});
+
         }
     }
 }
