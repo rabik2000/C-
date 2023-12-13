@@ -1,16 +1,21 @@
-﻿@model Bloggie.Web.Models.ViewModels.AddBlogPostRequest
+﻿@model Bloggie.Web.Models.ViewModels.EditBlogPostRequest
 @{
 }
 
 <div class="bg-secondary bg-opacity-10 py-2">
     <div class="container">
-        <h1>Add New BlogPost - Admin Functionality</h1>
+        <h1>Edit BlogPost - Admin Functionality</h1>
     </div>
 </div>
 
-
 <div class="container py-5">
-    <form method="post">
+    @if (Model != null)
+    {
+        <div class="mb-3">
+            <label class="form-label">Id</label>
+            <input type="text" class="form-control" id="id" asp-for="Id" readonly />
+
+        </div>
 
         <div class="mb-3">
             <label class="form-label">Heading</label>
@@ -62,31 +67,22 @@
 
         <div class="form-check mb-3">
             <input class="form-check-input" type="checkbox" id="visible" asp-for="Visible">
-            <label class="form-check-label" >
+            <label class="form-check-label">
                 Is Visible?
             </label>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Tags</label>
-            <select class="form-select" 
-             asp-items="@Model.Tags"
-                asp-for="SelectedTags">
+            <select class="form-select"
+                    asp-items="@Model.Tags"
+                    asp-for="SelectedTags">
             </select>
         </div>
+    }
 
-        <div class="mb-3">
-            <button type="submit" class="btn btn-dark">
-                Save
-            </button>
-        </div>
-
-    </form>
+    else
+    {
+        <p>No Blog Post Found!</p>
+    }
 </div>
-
-
-
-
-            <script type="text/javascript">
-    $("#publishedDate").datepicker("setDate", 15);
-                </script>
